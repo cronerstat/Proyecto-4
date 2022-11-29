@@ -12,6 +12,9 @@ public class Jugador : MonoBehaviour
     public Rigidbody rb;
     public float JumpForce = 9.81f; 
     public bool CanJump;
+    public AudioSource personajeSonidos;
+    public AudioClip itemSonidoClip;
+    public float volumen = 1f;
 
     void Start()
     {
@@ -47,11 +50,11 @@ public class Jugador : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.S))
         {   
-            transform.position += Vector3.back * speed * Time.deltaTime;
+            transform.position += Vector3.back * speed * Time.deltaTime;  
         }
         if (Input.GetKey(KeyCode.D))
         {  
-            transform.position += Vector3.right * speed * Time.deltaTime;
+            transform.position += Vector3.right * speed * Time.deltaTime;   
         }
         if (Input.GetKey(KeyCode.A))
         {     
@@ -67,6 +70,8 @@ public class Jugador : MonoBehaviour
     {
         if (col.transform.gameObject.tag == "Recolectables")
         {
+
+            personajeSonidos.PlayOneShot(itemSonidoClip,volumen);
             Destroy(col.transform.gameObject);
 
         }
